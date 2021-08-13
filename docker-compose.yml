@@ -1,0 +1,17 @@
+version: "3.8"
+services:
+  php-backend:
+    build: php-backend/docker-image
+    container_name: php-backend
+    networks:
+      - the-source-network
+    ports:
+      - 8080:80
+    volumes:
+      - ./php-backend/:/var/www/the-rush
+    environment:
+      - APACHE_DOCUMENT_ROOT=/var/www/the-rush/public
+networks:
+  the-source-network:
+    name: the-source-network
+    driver: bridge

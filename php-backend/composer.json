@@ -1,0 +1,24 @@
+{
+    "name": "rafaelmelocardoso/php-backend",
+    "description": "The Score backend made in PHP",
+    "require-dev": {
+        "phpunit/phpunit": "^9.5"
+    },
+    "authors": [
+        {
+            "name": "Rafael Melo Cardoso",
+            "email": "xinhus@gmail.com"
+        }
+    ],
+    "require": {},
+    "autoload": {
+        "psr-4": {
+            "TheScore\\": "src"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Test\\TheScore\\": "test"
+        }
+    }
+}
