@@ -2,8 +2,8 @@ name: PHP CI
 
 on:
   push:
-    branches:
-      - 'php-backend/**'
+    paths:
+      - '**.php'
 
 jobs:
   tests:
