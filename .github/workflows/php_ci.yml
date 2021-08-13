@@ -10,9 +10,12 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - uses: php-actions/composer@v5
+      - name: Install dependencies
+        uses: php-actions/composer@v5
+        with:
+          args: --working-dir=./php-backend/
       - name: PHPUnit Tests
         uses: php-actions/phpunit@v2
         with:
-          bootstrap: php-backend/vendor/autoload.php
-          configuration: php-backend/phpunit.xml
+          bootstrap: ./php-backend/vendor/autoload.php
+          configuration: ./php-backend/phpunit.xml
