@@ -1,0 +1,21 @@
+name: PHP CI
+
+on:
+  push:
+    paths:
+      - '**.php'
+
+jobs:
+  tests:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Install dependencies
+        uses: php-actions/composer@v5
+        with:
+          args: --working-dir=./php-backend/
+      - name: PHPUnit Tests
+        uses: php-actions/phpunit@v2
+        with:
+          bootstrap: ./php-backend/vendor/autoload.php
+          configuration: ./php-backend/phpunit.xml
