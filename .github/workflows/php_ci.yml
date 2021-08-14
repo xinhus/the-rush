@@ -13,9 +13,11 @@ jobs:
       - name: Install dependencies
         uses: php-actions/composer@v5
         with:
+          php_version: 8.0
           args: --working-dir=./php-backend/
       - name: PHPUnit Tests
         uses: php-actions/phpunit@v2
         with:
+          php_version: 8.0
           bootstrap: ./php-backend/vendor/autoload.php
           configuration: ./php-backend/phpunit.xml
