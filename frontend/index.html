@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
+    <link href="./src/css/style.css" rel="stylesheet">
+    <link href="./src/css/loading.css" rel="stylesheet">
+
+    <title>The Rush!</title>
+</head>
+<body>
+<div id="loader" class="loader visible">
+    <div class="loadingio-spinner-gear-mdhzec9kyxc"><div class="ldio-xh5r0c3xjw">
+        <div><div></div><div></div><div></div><div></div><div></div><div></div></div>
+    </div></div>
+</div>
+<div id="container" class="container invisible">
+    <div class="row">
+        <div class="col">
+            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#searchPlayerByName">
+                Search player by name
+            </button>
+            <a href="#" target="_blank" id="exportButton" class="btn btn-primary">
+                Export this result set
+            </a>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col">
+            <table class="table table-striped" id="table-records">
+                <thead>
+                <tr>
+                    <th scope="col" id="player-name-filter">
+                        <span>Player</span>
+                    </th>
+                    <th scope="col">Team</th>
+                    <th scope="col">Pos</th>
+                    <th scope="col">Att</th>
+                    <th scope="col">Att/G</th>
+                    <th scope="col">Yds</th>
+                    <th scope="col">Avg</th>
+                    <th scope="col">Avg/G</th>
+                    <th scope="col">TD</th>
+                    <th scope="col">Lng</th>
+                    <th scope="col">1st</th>
+                    <th scope="col">1st%</th>
+                    <th scope="col">20+</th>
+                    <th scope="col">40+</th>
+                    <th scope="col">FUM</th>
+                </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="searchPlayerByName" tabindex="-1" aria-labelledby="searchPlayerByNameLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <form onsubmit="return searchPlayerByName(event);">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="searchPlayerByNameLabel">Search Player by name</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="mb-3">
+                        <label for="playerNameField" class="form-label">Player Name</label>
+                        <input type="text" class="form-control" id="playerNameField" placeholder="Jon Doe">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary">Search</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj" crossorigin="anonymous"></script>
+<script src="src/js/api.js"></script>
+<script src="src/js/dom.js"></script>
+<script>
+    createRowsForRecordSet(retrieveDataFromApi(''));
+    const myModal = document.getElementById('searchPlayerByName')
+    const myInput = document.getElementById('playerNameField')
+
+    myModal.addEventListener('shown.bs.modal', function () {
+        myInput.focus()
+    })
+
+    searchPlayerByName = (event) => {
+        event.preventDefault();
+        bootstrap.Modal.getInstance(document.getElementById('searchPlayerByName')).hide();
+        setPageAsLoading();
+        const myInput = document.getElementById('playerNameField')
+        createRowsForRecordSet(retrieveDataFromApi(myInput.value));
+        return false;
+    }
+</script>
+</body>
+</html>
