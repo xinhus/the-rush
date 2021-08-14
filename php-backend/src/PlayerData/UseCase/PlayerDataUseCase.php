@@ -1,12 +1,12 @@
 <?php
 
 
-namespace TheScore\PlayerData\Controller;
+namespace TheScore\PlayerData\UseCase;
 
 
 use TheScore\PlayerData\Repository\PlayerDataRepositoryInJsonFile;
 
-class PlayerDataController
+class PlayerDataUseCase
 {
 
     private PlayerDataRepositoryInJsonFile $repository;

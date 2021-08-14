@@ -11,6 +11,16 @@ services:
       - ./php-backend/:/var/www/the-rush
     environment:
       - APACHE_DOCUMENT_ROOT=/var/www/the-rush/public
+  frontend:
+    image: nginx
+    container_name: frontend
+    networks:
+      - the-source-network
+    volumes:
+      - ./frontend/:/usr/share/nginx/html
+    ports:
+      - 8000:80
+
 networks:
   the-source-network:
     name: the-source-network

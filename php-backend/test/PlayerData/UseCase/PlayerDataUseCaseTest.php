@@ -1,16 +1,16 @@
 <?php
 
 
-namespace Test\TheScore\PlayerData\Controller;
+namespace Test\TheScore\PlayerData\UseCase;
 
 
 use Test\TheScore\PlayerData\Repository\JsonFileFactory;
 use Test\TheScore\PlayerData\Repository\PlayersDataConst;
 use Test\TheScore\TheScoreTestCase;
-use TheScore\PlayerData\Controller\PlayerDataController;
+use TheScore\PlayerData\UseCase\PlayerDataUseCase;
 use TheScore\PlayerData\Repository\PlayerDataRepositoryInJsonFile;
 
-class PlayerDataControllerTest extends TheScoreTestCase
+class PlayerDataUseCaseTest extends TheScoreTestCase
 {
     private string $jsonFilePath;
 
@@ -30,7 +30,7 @@ class PlayerDataControllerTest extends TheScoreTestCase
     public function testCanRetrieveAllRecords()
     {
         $repository = new PlayerDataRepositoryInJsonFile($this->jsonFilePath);
-        $controller = new PlayerDataController($repository);
+        $controller = new PlayerDataUseCase($repository);
         $result = $controller->getRecords('', []);
 
         $expectedData = [
@@ -49,7 +49,7 @@ class PlayerDataControllerTest extends TheScoreTestCase
     public function testCanFilterByName()
     {
         $repository = new PlayerDataRepositoryInJsonFile($this->jsonFilePath);
-        $controller = new PlayerDataController($repository);
+        $controller = new PlayerDataUseCase($repository);
         $result = $controller->getRecords('Ingram', []);
 
         $expectedData = [
@@ -65,7 +65,7 @@ class PlayerDataControllerTest extends TheScoreTestCase
     public function testFilterByNameOrderByLongestRushAsc()
     {
         $repository = new PlayerDataRepositoryInJsonFile($this->jsonFilePath);
-        $controller = new PlayerDataController($repository);
+        $controller = new PlayerDataUseCase($repository);
         $result = $controller->getRecords(
             'Ingram',
             [
