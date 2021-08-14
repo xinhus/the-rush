@@ -23,10 +23,7 @@ class PlayerDataRepository
 
     public function getAllRecordsByName(string $playersName): array
     {
-        return array_filter(
-            $this->getAllRecords(),
-            fn($entry) => strpos($entry['Player'], $playersName) !== false
-        );
+        return array_filter( $this->getAllRecords(),fn($entry) => str_contains($entry['Player'], $playersName));
     }
 
     public function getAllRecordsSortedByTotalRushingYards(bool $shouldOrderDesc): array
@@ -48,7 +45,6 @@ class PlayerDataRepository
         } , $allRecords);
 
         $allRecordsOrdered = $this->orderResultByField($allRecords, 'Lng_Int', $shouldOrderDesc);
-
 
         return array_map(function($record) {
             unset($record['Lng_Int']);
