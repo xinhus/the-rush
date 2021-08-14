@@ -37,6 +37,7 @@ class PlayerDataRepositoryInJsonFile
     {
         $fieldsToOrder = [];
         foreach ($order as $fieldName => $flag) {
+            $fieldName = str_replace(' ', '', $fieldName);
             $records = $this->createInternalFieldsToFilter($fieldName, $records);
             $fieldsToOrder = $this->addFieldToOrderArray($fieldName, $flag, $fieldsToOrder);
         }
@@ -84,14 +85,13 @@ class PlayerDataRepositoryInJsonFile
         );
     }
 
-    private function createInternalFieldsToFilter(int|string $fieldName, mixed $records): array
+    private function createInternalFieldsToFilter(string $fieldName, array $records): array
     {
-        $records = match (strtolower($fieldName)) {
+        return match (strtolower($fieldName)) {
             'totalrushingtouchdowns' => $this->createNumericFieldBasedOnOtherField($records, 'TD_Int', 'TD'),
             'totalrushingyards' => $this->createNumericFieldBasedOnOtherField($records, 'Yds_Int', 'Yds'),
             'longestrush' => $this->createNumericFieldBasedOnOtherField($records, 'Lng_Int', 'Lng'),
         };
-        return $records;
     }
 
     private function addFieldToOrderArray(string $fieldName, string $flagOrder, array $fieldsToOrder): array
