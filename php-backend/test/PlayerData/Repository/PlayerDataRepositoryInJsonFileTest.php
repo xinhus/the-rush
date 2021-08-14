@@ -209,4 +209,31 @@ class PlayerDataRepositoryInJsonFileTest extends TheScoreTestCase
 
         $this->assertEquals($expectedData, $result);
     }
+
+
+    public function testCanOrderByFieldNameWithSpace()
+    {
+
+        $jsonFilePath = JsonFileFactory::getBuilder()
+            ->addRecord(PlayersDataConst::MarkIngram)
+            ->addRecord(PlayersDataConst::MarkIngram74)
+            ->addRecord(PlayersDataConst::MarkIngram76)
+            ->generate();
+
+        $repository = new PlayerDataRepositoryInJsonFile($jsonFilePath);
+        $result = $repository->getRecords(
+            '',
+            [
+                'Longest Rush' => 'Asc',
+            ]
+        );
+
+        $expectedData = [
+            PlayersDataConst::MarkIngram74,
+            PlayersDataConst::MarkIngram,
+            PlayersDataConst::MarkIngram76,
+        ];
+
+        $this->assertEquals($expectedData, $result);
+    }
 }
