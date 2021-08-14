@@ -112,4 +112,38 @@ class PlayersDataConst
         '40+' => 2,
         'FUM' => 2,
     ];
+    public const MarkIngram76HigherYds = [
+        'Player' => 'Mark Ingram',
+        'Team' => 'NO',
+        'Pos' => 'RB',
+        'Att' => 205,
+        'Att/G' => 12.8,
+        'Yds' => '1,140',
+        'Avg' => 5.1,
+        'Yds/G' => 65.2,
+        'TD' => 6,
+        'Lng' => 76,
+        '1st' => 49,
+        '1st%' => 23.9,
+        '20+' => 4,
+        '40+' => 2,
+        'FUM' => 2,
+    ];
+    public const MarkIngram76HigherYdsHigherRushingTouchdowns =  [
+        'Player' => 'Mark Ingram',
+        'Team' => 'NO',
+        'Pos' => 'RB',
+        'Att' => 205,
+        'Att/G' => 12.8,
+        'Yds' => '1,140',
+        'Avg' => 5.1,
+        'Yds/G' => 65.2,
+        'TD' => 60,
+        'Lng' => 76,
+        '1st' => 49,
+        '1st%' => 23.9,
+        '20+' => 4,
+        '40+' => 2,
+        'FUM' => 2,
+    ];
 }
