@@ -15,5 +15,6 @@ $headers = $response->getHeaders();
 foreach ($headers as $name => $header) {
     header("{$name}: {$header[0]}");
 }
+header("Access-Control-Allow-Origin: *");
 http_response_code($response->getStatusCode());
 echo $response->getBody();
