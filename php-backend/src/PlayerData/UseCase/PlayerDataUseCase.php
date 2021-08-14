@@ -16,9 +16,25 @@ class PlayerDataUseCase
         $this->repository = $repository;
     }
 
-    public function getRecords(string $nameToFilter, array $order): string
+    public function getRecordsAsJson(string $nameToFilter, array $order): string
     {
         $allRecords = $this->repository->getRecords($nameToFilter, $order);
         return json_encode(array_values($allRecords), JSON_PRETTY_PRINT);
+    }
+
+    public function getRecordsAsCsv(mixed $nameToFilter, mixed $order)
+    {
+        $allRecords = $this->repository->getRecords($nameToFilter, $order);
+        $csv = '';
+        foreach ($allRecords as $record) {
+            if (empty($csv)) {
+                $csvHeader = array_keys($record);
+                $csv .= implode(',', $csvHeader) . PHP_EOL;
+            }
+
+            $csvValues = array_values($record);
+            $csv .= implode(',', $csvValues) . PHP_EOL;
+        }
+        return $csv;
     }
 }

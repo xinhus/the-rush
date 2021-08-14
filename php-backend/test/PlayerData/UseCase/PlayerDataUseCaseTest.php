@@ -31,7 +31,7 @@ class PlayerDataUseCaseTest extends TheScoreTestCase
     {
         $repository = new PlayerDataRepositoryInJsonFile($this->jsonFilePath);
         $controller = new PlayerDataUseCase($repository);
-        $result = $controller->getRecords('', []);
+        $result = $controller->getRecordsAsJson('', []);
 
         $expectedData = [
             PlayersDataConst::JoeBanyard,
@@ -50,7 +50,7 @@ class PlayerDataUseCaseTest extends TheScoreTestCase
     {
         $repository = new PlayerDataRepositoryInJsonFile($this->jsonFilePath);
         $controller = new PlayerDataUseCase($repository);
-        $result = $controller->getRecords('Ingram', []);
+        $result = $controller->getRecordsAsJson('Ingram', []);
 
         $expectedData = [
             PlayersDataConst::MarkIngram,
@@ -66,7 +66,7 @@ class PlayerDataUseCaseTest extends TheScoreTestCase
     {
         $repository = new PlayerDataRepositoryInJsonFile($this->jsonFilePath);
         $controller = new PlayerDataUseCase($repository);
-        $result = $controller->getRecords(
+        $result = $controller->getRecordsAsJson(
             'Ingram',
             [
                 'LongestRush' => 'Asc'

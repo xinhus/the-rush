@@ -14,23 +14,15 @@ class PlayersDataController
 
     public static function getRecordsAsJson(): Response
     {
-        $repo = new PlayerDataRepositoryInJsonFile(__DIR__ . '/../../../data/rushing.json');
-        $controller = new PlayerDataUseCase($repo);
-
-        [$nameToFilter, $order] = self::extractParametersFromQueryString();
-
         try {
-            $result = $controller->getRecords($nameToFilter, $order);
+            $repo = new PlayerDataRepositoryInJsonFile(__DIR__ . '/../../../data/rushing.json');
+            $controller = new PlayerDataUseCase($repo);
+
+            [$nameToFilter, $order] = PlayersDataController::extractParametersFromQueryString();
+            $result = $controller->getRecordsAsJson($nameToFilter, $order);
         } catch (Throwable $e) {
-            error_log($e->getMessage());
-            error_log($e->getTraceAsString());
-
-            $responseMessage = [
-                'message' => 'Oops, something wrong happened',
-            ];
-            return new Response(500, ['Content-Type' => 'application/json'], json_encode($responseMessage, JSON_PRETTY_PRINT));
+            return ErrorController::generateErrorResponse($e);
         }
-
         return new Response(200, ['Content-Type' => 'application/json'], $result);
     }
 
@@ -46,13 +38,21 @@ class PlayersDataController
 
     public static function getRecordsAsDownloadFile(): Response
     {
+        try {
+            $repo = new PlayerDataRepositoryInJsonFile(__DIR__ . '/../../../data/rushing.json');
+            $controller = new PlayerDataUseCase($repo);
+
+            [$nameToFilter, $order] = PlayersDataController::extractParametersFromQueryString();
+            $result = $controller->getRecordsAsCsv($nameToFilter, $order);
+        } catch (Throwable $e) {
+            return ErrorController::generateErrorResponse($e);
+        }
+
         $now = new \DateTimeImmutable();
-        /** @noinspection PhpIncompatibleReturnTypeInspection */
-        return self::getRecordsAsJson()
-            ->withAddedHeader('Content-Type', 'application/force-download')
-            ->withAddedHeader('Content-Type', 'application/octet-stream')
-            ->withAddedHeader('Content-Type', 'application/download')
-            ->withHeader('Content-Disposition', "attachment;filename=players_data_{$now->format('U')}.json")
-            ->withHeader('Content-Transfer-Encoding', "binary");
+        return new Response(200, [
+            'Content-Type' => 'text/csv, application/force-download, application/octet-stream, application/download',
+            'Content-Disposition' => "attachment;filename=players_data_{$now->format('U')}.csv",
+            'Content-Transfer-Encoding'=> 'binary',
+        ], $result);
     }
 }
