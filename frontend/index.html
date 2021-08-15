@@ -21,9 +21,6 @@
             <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#searchPlayerByName">
                 Search player by name
             </button>
-            <a href="#" target="_blank" id="exportButton" class="btn btn-primary">
-                Export this result set
-            </a>
         </div>
     </div>
 
@@ -67,6 +64,17 @@
         </div>
     </div>
 
+    <div class="row">
+        <div class="col">
+            <a href="#" target="_blank" id="exportButton" class="btn btn-primary">
+                Export this result set
+            </a>
+            <a href="#" target="_blank" id="exportThisPageButton" class="btn btn-primary">
+                Export this page
+            </a>
+        </div>
+    </div>
+
 
 
     <div class="row">
@@ -95,6 +103,20 @@
                 </thead>
                 <tbody></tbody>
             </table>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col ">
+            <nav aria-label="...">
+                <ul class="pagination justify-content-end">
+                    <li class="page-item disabled" id="previous-button">
+                        <button type="button" class="page-link" onclick="previousPage()" tabindex="-1" aria-disabled="true" disabled>Previous</button>
+                    </li>
+                    <li class="page-item" id="next-button">
+                        <button type="button" class="page-link" onclick="nextPage()">Next</button>
+                    </li>
+                </ul>
+            </nav>
         </div>
     </div>
 </div>
@@ -127,7 +149,7 @@
 <script src="src/js/dom.js"></script>
 <script src="src/js/app.js"></script>
 <script>
-    createRowsForRecordSet(retrieveDataFromApi('', []));
+    createRowsForRecordSet(retrieveDataFromApi('', [], 1, recordsPerPage));
     const myModal = document.getElementById('searchPlayerByName')
     const myInput = document.getElementById('playerNameField')
     myModal.addEventListener('shown.bs.modal', function () {
