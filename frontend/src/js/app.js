@@ -1,11 +1,12 @@
 
 let globalSorting = [];
+let currentPage = 1;
+const recordsPerPage = 10;
 
 const searchPlayerByName = () => {
-    bootstrap.Modal.getOrCreateInstance(document.getElementById('searchPlayerByName')).hide();
-    setPageAsLoading();
     const myInput = document.getElementById('playerNameField');
-    createRowsForRecordSet(retrieveDataFromApi(myInput.value, globalSorting));
+    setPageAsLoading();
+    createRowsForRecordSet(retrieveDataFromApi(myInput.value, globalSorting, currentPage, recordsPerPage));
     return false;
 }
 
@@ -31,4 +32,34 @@ const setOrderBy = (fieldName, order) => {
 const removeOrderBy = (fieldName) => {
     globalSorting = globalSorting.filter( item => item.name !== fieldName)
     searchPlayerByName();
+}
+
+const enableButton = (id) => {
+    const wrapper = document.getElementById(id);
+    wrapper.classList.remove('disabled')
+    let button = wrapper.getElementsByTagName('button')[0]
+    button.removeAttribute('tabindex')
+    button.removeAttribute('disabled')
+    button.removeAttribute('aria-disabled')
+}
+
+const disableButton = (id) =>  {
+    const wrapper = document.getElementById(id);
+    wrapper.classList.add('disabled')
+    let button = wrapper.getElementsByTagName('button')[0]
+    button.setAttribute('tabindex', '-1')
+    button.setAttribute('disabled', 'true')
+    button.setAttribute('aria-disabled', 'true')
+}
+
+const nextPage = () => {
+    currentPage++;
+    searchPlayerByName();
+    return false;
+}
+
+const previousPage = () => {
+    currentPage--;
+    searchPlayerByName();
+    return false;
 }
