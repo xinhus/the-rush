@@ -16,15 +16,15 @@ class PlayerDataUseCase
         $this->repository = $repository;
     }
 
-    public function getRecordsAsJson(string $nameToFilter, array $order): string
+    public function getRecordsAsJson(string $nameToFilter, array $order, int $page, int $recordsPerPage): string
     {
-        $allRecords = $this->repository->getRecords($nameToFilter, $order);
+        $allRecords = $this->repository->getRecords($nameToFilter, $order, $page, $recordsPerPage);
         return json_encode(array_values($allRecords), JSON_PRETTY_PRINT);
     }
 
-    public function getRecordsAsCsv(mixed $nameToFilter, mixed $order)
+    public function getRecordsAsCsv(mixed $nameToFilter, array $order, int $page, int $recordsPerPage): string
     {
-        $allRecords = $this->repository->getRecords($nameToFilter, $order);
+        $allRecords = $this->repository->getRecords($nameToFilter, $order, $page, $recordsPerPage);
         $csv = '';
         foreach ($allRecords as $record) {
             if (empty($csv)) {
