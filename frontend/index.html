@@ -26,6 +26,49 @@
             </a>
         </div>
     </div>
+
+    <div class="row">
+        <div class="col">
+            <button type="button" class="btn btn-primary" onclick="setOrderBy('Total Rushing Yards', 'Asc')" >
+                Order by Total Rushing Yards Asc
+            </button>
+            <button type="button" class="btn btn-primary" onclick="setOrderBy('Total Rushing Yards', 'Desc')" >
+                Order by Total Rushing Yards Desc
+            </button>
+            <button type="button" class="btn btn-primary" onclick="removeOrderBy('Total Rushing Yards')">
+                Remove Order by Total Rushing Yards
+            </button>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col">
+            <button type="button" class="btn btn-primary" onclick="setOrderBy('Longest Rush', 'Asc')" >
+                Order by Longest Rush Asc
+            </button>
+            <button type="button" class="btn btn-primary" onclick="setOrderBy('Longest Rush', 'Desc')" >
+                Order by Longest Rush Desc
+            </button>
+            <button type="button" class="btn btn-primary" onclick="removeOrderBy('Longest Rush')">
+                Remove Order by Longest Rush
+            </button>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col">
+            <button type="button" class="btn btn-primary" onclick="setOrderBy('Total Rushing Touchdowns', 'Asc')" >
+                Order by Total Rushing Touchdowns Asc
+            </button>
+            <button type="button" class="btn btn-primary" onclick="setOrderBy('Total Rushing Touchdowns', 'Desc')" >
+                Order by Total Rushing Touchdowns Desc
+            </button>
+            <button type="button" class="btn btn-primary" onclick="removeOrderBy('Total Rushing Touchdowns')">
+                Remove Order by Total Rushing Touchdowns
+            </button>
+        </div>
+    </div>
+
+
+
     <div class="row">
         <div class="col">
             <table class="table table-striped" id="table-records">
@@ -58,7 +101,7 @@
 
 <div class="modal fade" id="searchPlayerByName" tabindex="-1" aria-labelledby="searchPlayerByNameLabel" aria-hidden="true">
     <div class="modal-dialog">
-        <form onsubmit="return searchPlayerByName(event);">
+        <form onsubmit="return searchPlayerByName();">
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="searchPlayerByNameLabel">Search Player by name</h5>
@@ -82,23 +125,14 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj" crossorigin="anonymous"></script>
 <script src="src/js/api.js"></script>
 <script src="src/js/dom.js"></script>
+<script src="src/js/app.js"></script>
 <script>
-    createRowsForRecordSet(retrieveDataFromApi(''));
+    createRowsForRecordSet(retrieveDataFromApi('', []));
     const myModal = document.getElementById('searchPlayerByName')
     const myInput = document.getElementById('playerNameField')
-
     myModal.addEventListener('shown.bs.modal', function () {
         myInput.focus()
     })
-
-    searchPlayerByName = (event) => {
-        event.preventDefault();
-        bootstrap.Modal.getInstance(document.getElementById('searchPlayerByName')).hide();
-        setPageAsLoading();
-        const myInput = document.getElementById('playerNameField')
-        createRowsForRecordSet(retrieveDataFromApi(myInput.value));
-        return false;
-    }
 </script>
 </body>
 </html>
