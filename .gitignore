@@ -1,3 +1,18 @@
+###PHP Backend
+
 php-backend/.idea/
 php-backend/vendor/
 php-backend/.phpunit.result.cache
+
+
+###Elixir Backend
+elixir-backend/.idea/
+elixir-backend/_build/
+elixir-backend/cover/
+elixir-backend/deps/
+elixir-backend/doc/
+elixir-backend/.fetch
+elixir-backend/erl_crash.dump
+elixir-backend/*.ez
+elixir-backend/the_rush-*.tar
+elixir-backend/priv/static/
