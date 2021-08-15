@@ -82,23 +82,21 @@
             <table class="table table-striped" id="table-records">
                 <thead>
                 <tr>
-                    <th scope="col" id="player-name-filter">
-                        <span>Player</span>
-                    </th>
-                    <th scope="col">Team</th>
-                    <th scope="col">Pos</th>
-                    <th scope="col">Att</th>
-                    <th scope="col">Att/G</th>
-                    <th scope="col">Yds</th>
-                    <th scope="col">Avg</th>
-                    <th scope="col">Avg/G</th>
-                    <th scope="col">TD</th>
-                    <th scope="col">Lng</th>
-                    <th scope="col">1st</th>
-                    <th scope="col">1st%</th>
-                    <th scope="col">20+</th>
-                    <th scope="col">40+</th>
-                    <th scope="col">FUM</th>
+                    <th scope="col" data-bs-toggle="tooltip" data-bs-placement="top" title="Player's name">Player</th>
+                    <th scope="col" data-bs-toggle="tooltip" data-bs-placement="top" title="Player's team abbreviation">Team</th>
+                    <th scope="col" data-bs-toggle="tooltip" data-bs-placement="top" title="Player's position">Pos</th>
+                    <th scope="col" data-bs-toggle="tooltip" data-bs-placement="top" title="Rushing Attempts Per Game Average">Att/G</th>
+                    <th scope="col" data-bs-toggle="tooltip" data-bs-placement="top" title="Rushing Attempts)">Att</th>
+                    <th scope="col" data-bs-toggle="tooltip" data-bs-placement="top" title="Total Rushing Yards">Yds</th>
+                    <th scope="col" data-bs-toggle="tooltip" data-bs-placement="top" title="Rushing Average Yards Per Attempt">Avg</th>
+                    <th scope="col" data-bs-toggle="tooltip" data-bs-placement="top" title="Rushing Yards Per Game">Yds/G</th>
+                    <th scope="col" data-bs-toggle="tooltip" data-bs-placement="top" title="Total Rushing Touchdowns">TD</th>
+                    <th scope="col" data-bs-toggle="tooltip" data-bs-placement="top" title="Longest Rush. A 'T' represents a touchdown occurred">Lng</th>
+                    <th scope="col" data-bs-toggle="tooltip" data-bs-placement="top" title="Rushing First Downs">1st</th>
+                    <th scope="col" data-bs-toggle="tooltip" data-bs-placement="top" title="Rushing First Down Percentage">1st%</th>
+                    <th scope="col" data-bs-toggle="tooltip" data-bs-placement="top" title="Rushing 20+ Yards Each">20+</th>
+                    <th scope="col" data-bs-toggle="tooltip" data-bs-placement="top" title="Rushing 40+ Yards Each">40+</th>
+                    <th scope="col" data-bs-toggle="tooltip" data-bs-placement="top" title="Rushing Fumbles">FUM</th>
                 </tr>
                 </thead>
                 <tbody></tbody>
@@ -154,6 +152,10 @@
     const myInput = document.getElementById('playerNameField')
     myModal.addEventListener('shown.bs.modal', function () {
         myInput.focus()
+    });
+    var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
+    var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+        return new bootstrap.Tooltip(tooltipTriggerEl)
     })
 </script>
 </body>
