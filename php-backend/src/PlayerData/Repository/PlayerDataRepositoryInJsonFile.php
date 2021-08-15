@@ -14,12 +14,14 @@ class PlayerDataRepositoryInJsonFile
         $this->fullPathToFile = $fullPathToFile;
     }
 
-    public function getRecords(string $nameToFilter, array $order): array
+    public function getRecords(string $nameToFilter, array $order, int $page, int $recordsPerPage): array
     {
         $records = $this->loadRecordFromFile();
         $resultsFiltered = $this->filterByName($records, $nameToFilter);
         $resultsOrdered = $this->orderRecords($order, $resultsFiltered);
-        return $this->removeLogicFields($resultsOrdered);
+        $resultsPaginated = $this->paginateRecords($page, $recordsPerPage, $resultsOrdered);
+
+        return $this->removeLogicFields($resultsPaginated);
     }
 
     private function loadRecordFromFile(): array
@@ -30,7 +32,7 @@ class PlayerDataRepositoryInJsonFile
 
     private function filterByName(array $records, string $playersName): array
     {
-        return array_filter( $records,fn($entry) => str_contains($entry['Player'], $playersName));
+        return array_values(array_filter( $records,fn($entry) => str_contains($entry['Player'], $playersName)));
     }
 
     private function orderRecords(array $order, array $records): array
@@ -44,7 +46,7 @@ class PlayerDataRepositoryInJsonFile
 
         return empty($fieldsToOrder)
             ? $records
-            : $this->orderResultByField($records, $fieldsToOrder);
+            : array_values($this->orderResultByField($records, $fieldsToOrder));
     }
 
     private function createNumericFieldBasedOnOtherField(array $records, string $newFieldName, string $baseField): array
@@ -104,5 +106,20 @@ class PlayerDataRepositoryInJsonFile
         };
         $fieldsToOrder[$fieldNameR] = $shouldOrderDesc;
         return $fieldsToOrder;
+    }
+
+    private function paginateRecords(int $page, int $recordsPerPage, array $resultsOrdered): array
+    {
+        $initial = ($page - 1) * $recordsPerPage;
+        $max = $page * $recordsPerPage;
+
+        $resultsOrdered = array_values(
+            array_filter(
+                $resultsOrdered,
+                fn($position) => $initial <= $position && $position < $max,
+                ARRAY_FILTER_USE_KEY
+            )
+        );
+        return $resultsOrdered;
     }
 }
