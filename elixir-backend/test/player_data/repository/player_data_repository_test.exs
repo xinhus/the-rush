@@ -19,7 +19,7 @@ defmodule TheRush.PlayerData.Repository.PlayerDataRepositoryTest do
       "Yds" => 7,
       "Yds/G" => 7
     }]
-    assert TheRush.PlayerData.Repository.PlayerDataRepository.getRecords("../data/rushing.json", "Banyard", 1, 1) == expected
+    assert TheRush.PlayerData.Repository.PlayerDataRepository.getRecords("../data/rushing.json", "Banyard", 1, 1, []) == expected
   end
 
   test "can load just the fist record" do
@@ -40,7 +40,7 @@ defmodule TheRush.PlayerData.Repository.PlayerDataRepositoryTest do
       "Yds" => 7,
       "Yds/G" => 7
     }]
-    assert TheRush.PlayerData.Repository.PlayerDataRepository.getRecords("../data/rushing.json", "", 1, 1) == expected
+    assert TheRush.PlayerData.Repository.PlayerDataRepository.getRecords("../data/rushing.json", "", 1, 1, []) == expected
   end
 
   test "can load just the second record" do
@@ -61,7 +61,7 @@ defmodule TheRush.PlayerData.Repository.PlayerDataRepositoryTest do
       "Yds" => 5,
       "Yds/G" => 1.7
     }]
-    assert TheRush.PlayerData.Repository.PlayerDataRepository.getRecords("../data/rushing.json", "", 2, 1) == expected
+    assert TheRush.PlayerData.Repository.PlayerDataRepository.getRecords("../data/rushing.json", "", 2, 1, []) == expected
   end
 
   test "can sort by total rushing touchdown desc" do

@@ -1,16 +1,5 @@
 defmodule TheRush.PlayerData.Repository.PlayerDataRepository do
 
-  def getRecords(filename, playerName, page, recordsPerPage) do
-    initial = (page - 1) * recordsPerPage;
-    max = initial + recordsPerPage - 1;
-
-    filename
-    |> File.read!
-    |> Jason.decode!
-    |> Enum.filter(fn %{"Player" => currentPlayerName} -> String.contains?(currentPlayerName, playerName) end)
-    |> Enum.slice(initial..max)
-  end
-
   def getRecords(filename, playerName, page, recordsPerPage, order) do
     initial = (page - 1) * recordsPerPage
     max = initial + recordsPerPage - 1
@@ -24,6 +13,7 @@ defmodule TheRush.PlayerData.Repository.PlayerDataRepository do
     |> Enum.slice(initial..max)
   end
 
+  defp sortRecords(records, order) when length(order) == 0, do: records
   defp sortRecords(records, order) do
     order
     |> Enum.map( &sortByField(&1, records))
