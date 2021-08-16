@@ -4,7 +4,6 @@ defmodule TheRush.PlayerData.Repository.PlayerDataRepository do
     initial = (page - 1) * recordsPerPage
     max = initial + recordsPerPage - 1
 
-
     filename
     |> File.read!
     |> Jason.decode!
