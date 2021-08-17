@@ -2,9 +2,10 @@ defmodule TheRushWeb.PlayersDataController do
   use TheRushWeb, :controller
 
   def getPlayers(conn, params) do
-    conn = conn
+    conn
       |> put_resp_header("access-control-allow-origin", "*")
-    render conn, "content_raw.json", response: TheRush.PlayerData.Repository.PlayerDataRepository.getRecords("./data/rushing.json", getPlayerNameParam(params), getPageParam(params), getRecordsPerPageParam(params), getOrderParam(params))
+      |> put_resp_content_type("application/json")
+      |> resp(200, TheRush.PlayerData.UseCase.PlayerDataUseCase.getRecordsAsJson(TheRush.PlayerData.Repository.PlayerDataRepository, getPlayerNameParam(params), getPageParam(params), getRecordsPerPageParam(params), getOrderParam(params)))
   end
 
   def exportPlayers(conn, params) do
@@ -12,7 +13,7 @@ defmodule TheRushWeb.PlayersDataController do
   |> put_resp_header("access-control-allow-origin", "*")
   |> put_resp_content_type("text/csv, application/force-download, application/octet-stream, application/download")
   |> put_resp_header("content-disposition", ~s[attachment; filename="players_data.csv"])
-  |> resp(200,TheRush.PlayerData.UseCase.PlayerDataUseCase.getRecordsAsCsv(TheRush.PlayerData.Repository.PlayerDataRepository, "./data/rushing.json", getPlayerNameParam(params), getPageParam(params), getRecordsPerPageParam(params), getOrderParam(params)))
+  |> resp(200,TheRush.PlayerData.UseCase.PlayerDataUseCase.getRecordsAsCsv(TheRush.PlayerData.Repository.PlayerDataRepository, getPlayerNameParam(params), getPageParam(params), getRecordsPerPageParam(params), getOrderParam(params)))
   end
 
 
