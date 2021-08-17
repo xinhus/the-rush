@@ -8,5 +8,6 @@ defmodule TheRushWeb.Router do
   scope "/", TheRushWeb do
     pipe_through :api
     get "/playersData", PlayersDataController, :getPlayers
+    get "/playersData/export", PlayersDataController, :exportPlayers
   end
 end
