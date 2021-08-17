@@ -1,12 +1,12 @@
 defmodule TheRush.PlayerData.UseCase.PlayerDataUseCase do
 
-  def getRecordsAsJson(repository, filename, playerName, page, recordsPerPage, order) do
-    repository.getRecords(filename, playerName, page, recordsPerPage, order)
+  def getRecordsAsJson(repository, playerName, page, recordsPerPage, order) do
+    repository.getRecords(playerName, page, recordsPerPage, order)
     |>Jason.encode!
   end
 
-  def getRecordsAsCsv(repository, filename, playerName, page, recordsPerPage, order) do
-    records = repository.getRecords(filename, playerName, page, recordsPerPage, order)
+  def getRecordsAsCsv(repository, playerName, page, recordsPerPage, order) do
+    records = repository.getRecords(playerName, page, recordsPerPage, order)
 
     records
     |> Enum.at(0)

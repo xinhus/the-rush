@@ -1,10 +1,10 @@
 defmodule TheRush.PlayerData.Repository.PlayerDataRepository do
 
-  def getRecords(filename, playerName, page, recordsPerPage, order) do
+  def getRecords(playerName, page, recordsPerPage, order) do
     initial = (page - 1) * recordsPerPage
     max = initial + recordsPerPage - 1
 
-    filename
+    "./data/rushing.json"
     |> File.read!
     |> Jason.decode!
     |> Enum.filter(fn %{"Player" => currentPlayerName} -> String.contains?(currentPlayerName, playerName) end)
