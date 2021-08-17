@@ -19,7 +19,7 @@ defmodule TheRush.PlayerData.Repository.PlayerDataRepositoryTest do
       "Yds" => 7,
       "Yds/G" => 7
     }]
-    assert TheRush.PlayerData.Repository.PlayerDataRepository.getRecords("../data/rushing.json", "Banyard", 1, 1, []) == expected
+    assert TheRush.PlayerData.Repository.PlayerDataRepository.getRecords("./data/rushing.json", "Banyard", 1, 1, []) == expected
   end
 
   test "can load just the fist record" do
@@ -40,7 +40,7 @@ defmodule TheRush.PlayerData.Repository.PlayerDataRepositoryTest do
       "Yds" => 7,
       "Yds/G" => 7
     }]
-    assert TheRush.PlayerData.Repository.PlayerDataRepository.getRecords("../data/rushing.json", "", 1, 1, []) == expected
+    assert TheRush.PlayerData.Repository.PlayerDataRepository.getRecords("./data/rushing.json", "", 1, 1, []) == expected
   end
 
   test "can load just the second record" do
@@ -61,7 +61,7 @@ defmodule TheRush.PlayerData.Repository.PlayerDataRepositoryTest do
       "Yds" => 5,
       "Yds/G" => 1.7
     }]
-    assert TheRush.PlayerData.Repository.PlayerDataRepository.getRecords("../data/rushing.json", "", 2, 1, []) == expected
+    assert TheRush.PlayerData.Repository.PlayerDataRepository.getRecords("./data/rushing.json", "", 2, 1, []) == expected
   end
 
   test "can sort by total rushing touchdown desc" do
@@ -82,7 +82,7 @@ defmodule TheRush.PlayerData.Repository.PlayerDataRepositoryTest do
       "Yds" => "1,161",
       "Yds/G" => 72.6
     }]
-    assert TheRush.PlayerData.Repository.PlayerDataRepository.getRecords("../data/rushing.json", "", 1, 1, [:TotalRushingTouchdownDesc]) == expected
+    assert TheRush.PlayerData.Repository.PlayerDataRepository.getRecords("./data/rushing.json", "", 1, 1, [:TotalRushingTouchdownDesc]) == expected
   end
 
   test "can sort by total rushing touchdown asc" do
@@ -103,7 +103,7 @@ defmodule TheRush.PlayerData.Repository.PlayerDataRepositoryTest do
       "Yds" => 7,
       "Yds/G" => 7
     }]
-    assert TheRush.PlayerData.Repository.PlayerDataRepository.getRecords("../data/rushing.json", "", 1, 1, [:TotalRushingTouchdownAsc]) == expected
+    assert TheRush.PlayerData.Repository.PlayerDataRepository.getRecords("./data/rushing.json", "", 1, 1, [:TotalRushingTouchdownAsc]) == expected
   end
 
   test "can sort by longest rush desc" do
@@ -124,7 +124,7 @@ defmodule TheRush.PlayerData.Repository.PlayerDataRepositoryTest do
       "Yds" => "952",
       "Yds/G" => 59.5
     }]
-    assert TheRush.PlayerData.Repository.PlayerDataRepository.getRecords("../data/rushing.json", "", 1, 1, [:LongestRushDesc]) == expected
+    assert TheRush.PlayerData.Repository.PlayerDataRepository.getRecords("./data/rushing.json", "", 1, 1, [:LongestRushDesc]) == expected
   end
 
   test "can sort by longest rush asc" do
@@ -145,7 +145,7 @@ defmodule TheRush.PlayerData.Repository.PlayerDataRepositoryTest do
       "Yds" => -8,
       "Yds/G" => -0.6
     }]
-    assert TheRush.PlayerData.Repository.PlayerDataRepository.getRecords("../data/rushing.json", "", 1, 1, [:LongestRushAsc]) == expected
+    assert TheRush.PlayerData.Repository.PlayerDataRepository.getRecords("./data/rushing.json", "", 1, 1, [:LongestRushAsc]) == expected
   end
 
   test "can sort by total rushing yards desc" do
@@ -166,7 +166,7 @@ defmodule TheRush.PlayerData.Repository.PlayerDataRepositoryTest do
       "Yds" => "1,631",
       "Yds/G" => 108.7
     }]
-    assert TheRush.PlayerData.Repository.PlayerDataRepository.getRecords("../data/rushing.json", "", 1, 1, [:TotalRushingYardsDesc]) == expected
+    assert TheRush.PlayerData.Repository.PlayerDataRepository.getRecords("./data/rushing.json", "", 1, 1, [:TotalRushingYardsDesc]) == expected
   end
 
   test "can sort by total rushing yards asc" do
@@ -187,7 +187,7 @@ defmodule TheRush.PlayerData.Repository.PlayerDataRepositoryTest do
       "Yds" => -23,
       "Yds/G" => -1.4
     }]
-    assert TheRush.PlayerData.Repository.PlayerDataRepository.getRecords("../data/rushing.json", "", 1, 1, [:TotalRushingYardsAsc]) == expected
+    assert TheRush.PlayerData.Repository.PlayerDataRepository.getRecords("./data/rushing.json", "", 1, 1, [:TotalRushingYardsAsc]) == expected
   end
 
 end
