@@ -27,14 +27,14 @@ frontend
 On to top-left, you can select which backend you want to use :) you can swap between PHP and Elixir.
 
 
-##About the solution
+## About the solution
 - This project take into concern that we may or may not change the language and that we may or may not use a different format of repo.
 - I've used PRs during the entire process, so you can check the closed the PR to see the development process.
 - There are two github actions implemented. Elixir and PHP, so when you commit a `.php` file it will run the php action, and any `.ex` or `.exs` will run the elixir one
 - I use a lot TDD, so I highly recommend you to take a look into my tests.
 - There is one knowing bug on the elixir backend that I couldn't solve (Sorting by multiple fields)
 
-###Backend
+### Backend
 There are two backends available. Both are just an API described as:
 
 `/playersData`
@@ -52,15 +52,15 @@ order = is an array on the format Field => name ex
     order[Total Rushing Yards]=Asc //Total Rushing Yards  Desc
 ```
 
-####Assumptions
+#### Assumptions
 - This API was designed as a simple and public api.
 - We can expand it and implement authentication/authorization. (oAuth2 or something like that)
 
-####PHP Backend
+#### PHP Backend
 - No Framework used
 - One library added to use the PSR-7: HTTP message interfaces
-####Elixir Backend
+#### Elixir Backend
 - Used Phoenix as the base project
 
-###Frontend
+### Frontend
 The frontend is using HTML/CSS. It was used bootstrap as base and icons.
