@@ -7,4 +7,5 @@ COPY ./../ $APP_HOME
 WORKDIR $APP_HOME
 
 RUN mix local.hex --force
-CMD cd $APP_HOME && mix deps.get && mix do compile && mix phx.server
+RUN mix local.rebar --force
+CMD cd $APP_HOME && mix deps.get --force && mix do compile && mix phx.server
