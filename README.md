@@ -5,7 +5,8 @@ This project is dockerized so to startup just run
 
 ```docker compose up``` (assuming you have docker & docker compose installed)
 
-And access`http://localhost:8000`
+Wait until you see the message ```Access TheRushWeb.Endpoint at ...``` from `elixir-backend` and then access `http://localhost:8000`.
+(The first time that run up, it will take more time than usual, downloading depencies, compiling etc...)
 
 It will build the image and start three containers described as
 
