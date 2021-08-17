@@ -7,6 +7,8 @@ services:
       - the-source-network
     ports:
       - 8090:4000
+    volumes:
+      - ./elixir-backend/:/the-rush
   php-backend:
     build: php-backend/docker-image
     container_name: php-backend

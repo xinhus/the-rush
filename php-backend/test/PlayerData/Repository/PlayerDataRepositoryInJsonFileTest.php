@@ -57,13 +57,14 @@ class PlayerDataRepositoryInJsonFileTest extends TheScoreTestCase
     {
         $filePath = JsonFileFactory::getBuilder()
             ->addRecord(PlayersDataConst::MarkIngram76)
+            ->addRecord(PlayersDataConst::SamKoch)
             ->addRecord(PlayersDataConst::MarkIngram76HigherYds)
             ->generate();
 
         $repo = new PlayerDataRepositoryInJsonFile($filePath);
         $result = $repo->getRecords('', ['TotalRushingYards' => 'DESC'], 1, 25);
 
-        $expectedResult = [PlayersDataConst::MarkIngram76HigherYds, PlayersDataConst::MarkIngram76];
+        $expectedResult = [PlayersDataConst::MarkIngram76HigherYds, PlayersDataConst::MarkIngram76, PlayersDataConst::SamKoch];
         $this->assertEquals($expectedResult, $result);
     }
 
@@ -71,13 +72,14 @@ class PlayerDataRepositoryInJsonFileTest extends TheScoreTestCase
     {
         $filePath = JsonFileFactory::getBuilder()
             ->addRecord(PlayersDataConst::ShaunHill)
+            ->addRecord(PlayersDataConst::SamKoch)
             ->addRecord(PlayersDataConst::JoeBanyard)
             ->generate();
 
         $repo = new PlayerDataRepositoryInJsonFile($filePath);
         $result = $repo->getRecords('', ['TotalRushingYards' => 'ASC'], 1, 25);
 
-        $expectedResult = [PlayersDataConst::ShaunHill, PlayersDataConst::JoeBanyard];
+        $expectedResult = [PlayersDataConst::SamKoch, PlayersDataConst::ShaunHill, PlayersDataConst::JoeBanyard];
         $this->assertEquals($expectedResult, $result);
     }
 
@@ -100,6 +102,7 @@ class PlayerDataRepositoryInJsonFileTest extends TheScoreTestCase
     {
         $filePath = JsonFileFactory::getBuilder()
             ->addRecord(PlayersDataConst::JoeBanyard)
+            ->addRecord(PlayersDataConst::AJoeBanyard)
             ->addRecord(PlayersDataConst::ShaunHill)
             ->addRecord(PlayersDataConst::LanceDunbar)
             ->generate();
@@ -107,7 +110,7 @@ class PlayerDataRepositoryInJsonFileTest extends TheScoreTestCase
         $repo = new PlayerDataRepositoryInJsonFile($filePath);
         $result = $repo->getRecords('', ['TotalRushingTouchdowns' => 'ASC'], 1, 25);
 
-        $expectedResult = [PlayersDataConst::JoeBanyard, PlayersDataConst::ShaunHill, PlayersDataConst::LanceDunbar];
+        $expectedResult = [PlayersDataConst::JoeBanyard, PlayersDataConst::AJoeBanyard, PlayersDataConst::ShaunHill, PlayersDataConst::LanceDunbar];
         $this->assertEquals($expectedResult, $result);
     }
 

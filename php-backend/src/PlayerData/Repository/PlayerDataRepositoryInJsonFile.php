@@ -53,7 +53,7 @@ class PlayerDataRepositoryInJsonFile
     {
         return array_map(
             function ($record) use ($newFieldName, $baseField) {
-                $record[$newFieldName] = floatval(preg_replace("/((?![0-9.]).)*/", '', $record[$baseField]));
+                $record[$newFieldName] = floatval(preg_replace("/((?![0-9\-.]).)*/", '', $record[$baseField]));
                 return $record;
             },
             $records
@@ -62,6 +62,12 @@ class PlayerDataRepositoryInJsonFile
 
     private function orderResultByField(array $allRecords, array $order): array {
         $array_to_order = [];
+        $allRecords = array_values($allRecords);
+
+        foreach ($allRecords as $key => $record) {
+            $allRecords[$key]["Position"] = $key;
+        }
+        $order["Position"] = false;
         foreach ($order as $fieldName => $shouldOrderDesc) {
             $columnToFilter = array_column($allRecords, $fieldName);
             $orderFlag = $shouldOrderDesc ? SORT_DESC : SORT_ASC;
@@ -81,6 +87,7 @@ class PlayerDataRepositoryInJsonFile
                 unset($record['Lng_Int']);
                 unset($record['Yds_Int']);
                 unset($record['TD_Int']);
+                unset($record['Position']);
                 return $record;
             },
             $records
