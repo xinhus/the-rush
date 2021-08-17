@@ -1,5 +1,12 @@
 version: "3.8"
 services:
+  elixir-backend:
+    build: elixir-backend/docker-image
+    container_name: elixir-backend
+    networks:
+      - the-source-network
+    ports:
+      - 8090:4000
   php-backend:
     build: php-backend/docker-image
     container_name: php-backend
