@@ -6,7 +6,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
     <link href="./src/css/style.css" rel="stylesheet">
     <link href="./src/css/loading.css" rel="stylesheet">
-
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
     <title>The Rush!</title>
 </head>
 <body>
@@ -20,90 +20,64 @@
     <div class="row">
         <div class="col">
             <button type="button" class="btn btn-primary" onclick="setApiServerAs('Php');">
-                Send Request as PHP
+                <img src="https://www.php.net/images/php8/logo_php8.svg" alt="PHP 8" width="50">
+                Use PHP as the backend
             </button>
             <button type="button" class="btn btn-primary" onclick="setApiServerAs('Elixir');">
-                Send Request as Elixir
+                <img src="https://elixir-lang.org/images/logo/logo.png" alt="Elixir" width="50">
+                Use Elixir as the backend
             </button>
         </div>
     </div>
-
-    <div class="row">
-        <div class="col">
-            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#searchPlayerByName">
-                Search player by name
-            </button>
-        </div>
-    </div>
-
-    <div class="row">
-        <div class="col">
-            <button type="button" class="btn btn-primary" onclick="setOrderBy('Total Rushing Yards', 'Asc')" >
-                Order by Total Rushing Yards Asc
-            </button>
-            <button type="button" class="btn btn-primary" onclick="setOrderBy('Total Rushing Yards', 'Desc')" >
-                Order by Total Rushing Yards Desc
-            </button>
-            <button type="button" class="btn btn-primary" onclick="removeOrderBy('Total Rushing Yards')">
-                Remove Order by Total Rushing Yards
-            </button>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col">
-            <button type="button" class="btn btn-primary" onclick="setOrderBy('Longest Rush', 'Asc')" >
-                Order by Longest Rush Asc
-            </button>
-            <button type="button" class="btn btn-primary" onclick="setOrderBy('Longest Rush', 'Desc')" >
-                Order by Longest Rush Desc
-            </button>
-            <button type="button" class="btn btn-primary" onclick="removeOrderBy('Longest Rush')">
-                Remove Order by Longest Rush
-            </button>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col">
-            <button type="button" class="btn btn-primary" onclick="setOrderBy('Total Rushing Touchdowns', 'Asc')" >
-                Order by Total Rushing Touchdowns Asc
-            </button>
-            <button type="button" class="btn btn-primary" onclick="setOrderBy('Total Rushing Touchdowns', 'Desc')" >
-                Order by Total Rushing Touchdowns Desc
-            </button>
-            <button type="button" class="btn btn-primary" onclick="removeOrderBy('Total Rushing Touchdowns')">
-                Remove Order by Total Rushing Touchdowns
-            </button>
-        </div>
-    </div>
-
-    <div class="row">
-        <div class="col">
-            <a href="#" target="_blank" id="exportButton" class="btn btn-primary">
-                Export this result set
-            </a>
-            <a href="#" target="_blank" id="exportThisPageButton" class="btn btn-primary">
-                Export this page
-            </a>
-        </div>
-    </div>
-
-
 
     <div class="row">
         <div class="col">
             <table class="table table-striped" id="table-records">
                 <thead>
                 <tr>
-                    <th scope="col" data-bs-toggle="tooltip" data-bs-placement="top" title="Player's name">Player</th>
+                    <th scope="col" data-bs-toggle="tooltip" data-bs-placement="top" title="Player's name">Player <i class="bi bi-search" role="button" data-bs-toggle="modal" data-bs-target="#searchPlayerByName"></i></th>
                     <th scope="col" data-bs-toggle="tooltip" data-bs-placement="top" title="Player's team abbreviation">Team</th>
                     <th scope="col" data-bs-toggle="tooltip" data-bs-placement="top" title="Player's position">Pos</th>
                     <th scope="col" data-bs-toggle="tooltip" data-bs-placement="top" title="Rushing Attempts Per Game Average">Att/G</th>
                     <th scope="col" data-bs-toggle="tooltip" data-bs-placement="top" title="Rushing Attempts)">Att</th>
-                    <th scope="col" data-bs-toggle="tooltip" data-bs-placement="top" title="Total Rushing Yards">Yds</th>
+                    <th scope="col" data-bs-toggle="tooltip" data-bs-placement="top" title="Total Rushing Yards">
+                        Yds
+                        <span role="button" class="sort-asc" onclick="setOrderBy('Total Rushing Yards', 'Asc', this)" >
+                            <i class="bi bi-filter" data-bs-toggle="tooltip" data-bs-placement="top" title="Order by Total Rushing Yards Asc"></i>
+                        </span>
+                                    <span role="button" class="sort-desc d-none" onclick="setOrderBy('Total Rushing Yards', 'Desc', this)" >
+                            <i class="bi bi-sort-numeric-up" data-bs-toggle="tooltip" data-bs-placement="top" title="Order by Total Rushing Yards Desc"></i>
+                        </span>
+                                    <span role="button" class="remove-sort d-none" onclick="removeOrderBy('Total Rushing Yards', this)" >
+                            <i class="bi bi-sort-numeric-down" data-bs-toggle="tooltip" data-bs-placement="top" title=" Remove Order by Total Rushing Yards"></i>
+                        </span>
+                    </th>
                     <th scope="col" data-bs-toggle="tooltip" data-bs-placement="top" title="Rushing Average Yards Per Attempt">Avg</th>
                     <th scope="col" data-bs-toggle="tooltip" data-bs-placement="top" title="Rushing Yards Per Game">Yds/G</th>
-                    <th scope="col" data-bs-toggle="tooltip" data-bs-placement="top" title="Total Rushing Touchdowns">TD</th>
-                    <th scope="col" data-bs-toggle="tooltip" data-bs-placement="top" title="Longest Rush. A 'T' represents a touchdown occurred">Lng</th>
+                    <th scope="col" data-bs-toggle="tooltip" data-bs-placement="top" title="Total Rushing Touchdowns">
+                        TD
+                        <span role="button" class="sort-asc" onclick="setOrderBy('Total Rushing Touchdowns', 'Asc', this)" >
+                            <i class="bi bi-filter" data-bs-toggle="tooltip" data-bs-placement="top" title="Order by Total Rushing Touchdowns Asc"></i>
+                        </span>
+                                    <span role="button" class="sort-desc d-none" onclick="setOrderBy('Total Rushing Touchdowns', 'Desc', this)" >
+                            <i class="bi bi-sort-numeric-up" data-bs-toggle="tooltip" data-bs-placement="top" title="Order by Total Rushing Touchdowns Desc"></i>
+                        </span>
+                                    <span role="button" class="remove-sort d-none" onclick="removeOrderBy('Total Rushing Touchdowns', this)" >
+                            <i class="bi bi-sort-numeric-down" data-bs-toggle="tooltip" data-bs-placement="top" title=" Remove Order by Total Rushing Touchdowns"></i>
+                        </span>
+                    </th>
+                    <th scope="col" data-bs-toggle="tooltip" data-bs-placement="top" title="Longest Rush. A 'T' represents a touchdown occurred">
+                        Lng
+                        <span role="button" class="sort-asc" onclick="setOrderBy('Longest Rush', 'Asc', this)" >
+                            <i class="bi bi-filter" data-bs-toggle="tooltip" data-bs-placement="top" title="Order by Longest Rush Asc"></i>
+                        </span>
+                                    <span role="button" class="sort-desc d-none" onclick="setOrderBy('Longest Rush', 'Desc', this)" >
+                            <i class="bi bi-sort-numeric-up" data-bs-toggle="tooltip" data-bs-placement="top" title="Order by Longest Rush Desc"></i>
+                        </span>
+                                    <span role="button" class="remove-sort d-none" onclick="removeOrderBy('Longest Rush', this)" >
+                            <i class="bi bi-sort-numeric-down" data-bs-toggle="tooltip" data-bs-placement="top" title=" Remove Order by Longest Rush"></i>
+                        </span>
+                    </th>
                     <th scope="col" data-bs-toggle="tooltip" data-bs-placement="top" title="Rushing First Downs">1st</th>
                     <th scope="col" data-bs-toggle="tooltip" data-bs-placement="top" title="Rushing First Down Percentage">1st%</th>
                     <th scope="col" data-bs-toggle="tooltip" data-bs-placement="top" title="Rushing 20+ Yards Each">20+</th>
@@ -116,6 +90,14 @@
         </div>
     </div>
     <div class="row">
+        <div class="col">
+            <a href="#" target="_blank" id="exportButton" class="btn btn-primary">
+                <i class="bi bi-download"></i> Export this result set
+            </a>
+            <a href="#" target="_blank" id="exportThisPageButton" class="btn btn-primary">
+                <i class="bi bi-download"></i> Export this page
+            </a>
+        </div>
         <div class="col ">
             <nav aria-label="...">
                 <ul class="pagination justify-content-end">

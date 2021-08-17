@@ -11,7 +11,13 @@ const searchPlayerByName = () => {
     return false;
 }
 
-const setOrderBy = (fieldName, order) => {
+const setOrderBy = (fieldName, order, element) => {
+    element.classList.add('d-none')
+    let classNames = order === 'Asc'? 'sort-desc' : 'remove-sort';
+    debugger;
+    const elementToShow = element.parentElement.getElementsByClassName(classNames)[0].classList
+    elementToShow.remove('d-none')
+
     let found = false;
     globalSorting = globalSorting.map( field => {
         if (field.name === fieldName) {
@@ -30,7 +36,12 @@ const setOrderBy = (fieldName, order) => {
     searchPlayerByName();
 }
 
-const removeOrderBy = (fieldName) => {
+const removeOrderBy = (fieldName, element) => {
+    element.classList.add('d-none')
+    const elementToShow = element.parentElement.getElementsByClassName('sort-asc')[0].classList
+    elementToShow.remove('d-none')
+
+
     globalSorting = globalSorting.filter( item => item.name !== fieldName)
     searchPlayerByName();
 }
