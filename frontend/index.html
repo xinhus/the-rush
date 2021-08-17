@@ -16,6 +16,18 @@
     </div></div>
 </div>
 <div id="container" class="container invisible">
+
+    <div class="row">
+        <div class="col">
+            <button type="button" class="btn btn-primary" onclick="setApiServerAs('Php');">
+                Send Request as PHP
+            </button>
+            <button type="button" class="btn btn-primary" onclick="setApiServerAs('Elixir');">
+                Send Request as Elixir
+            </button>
+        </div>
+    </div>
+
     <div class="row">
         <div class="col">
             <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#searchPlayerByName">
@@ -147,7 +159,7 @@
 <script src="src/js/dom.js"></script>
 <script src="src/js/app.js"></script>
 <script>
-    createRowsForRecordSet(retrieveDataFromApi('', [], 1, recordsPerPage));
+    createRowsForRecordSet(retrieveDataFromApi('http://localhost:8080', '', [], 1, recordsPerPage));
     const myModal = document.getElementById('searchPlayerByName')
     const myInput = document.getElementById('playerNameField')
     myModal.addEventListener('shown.bs.modal', function () {

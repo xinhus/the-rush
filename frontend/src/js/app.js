@@ -2,11 +2,12 @@
 let globalSorting = [];
 let currentPage = 1;
 const recordsPerPage = 10;
+let apiServer = "http://localhost:8080";
 
 const searchPlayerByName = () => {
     const myInput = document.getElementById('playerNameField');
     setPageAsLoading();
-    createRowsForRecordSet(retrieveDataFromApi(myInput.value, globalSorting, currentPage, recordsPerPage));
+    createRowsForRecordSet(retrieveDataFromApi(apiServer, myInput.value, globalSorting, currentPage, recordsPerPage));
     return false;
 }
 
@@ -62,4 +63,9 @@ const previousPage = () => {
     currentPage--;
     searchPlayerByName();
     return false;
+}
+
+const setApiServerAs = (server) => {
+    apiServer = (server === "Elixir") ? "http://localhost:8090": "http://localhost:8080";
+    searchPlayerByName();
 }
