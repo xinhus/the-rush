@@ -43,6 +43,24 @@ class PlayersDataConst
         'FUM' => 0,
     ];
 
+    public const AJoeBanyard = [
+        'Player' => 'AJoe Banyard',
+        'Team' => 'JAX',
+        'Pos' => 'RB',
+        'Att' => 2,
+        'Att/G' => 2,
+        'Yds' => 7,
+        'Avg' => 3.5,
+        'Yds/G' => 7,
+        'TD' => 0,
+        'Lng' => '7',
+        '1st' => 0,
+        '1st%' => 0,
+        '20+' => 0,
+        '40+' => 0,
+        'FUM' => 0,
+    ];
+
     public const LanceDunbar = [
         'Player' => 'Lance Dunbar',
         'Team' => 'DAL',
@@ -145,5 +163,22 @@ class PlayersDataConst
         '20+' => 4,
         '40+' => 2,
         'FUM' => 2,
+    ];
+    const SamKoch = [
+        'Player' => 'Sam Koch',
+        'Team' => 'BAL',
+        'Pos' => 'P',
+        'Att' =>2,
+        'Att/G' =>0.1,
+        'Yds' =>-823,
+        'Avg' =>-11.5,
+        'Yds/G' =>-1.4,
+        'TD' =>0,
+        'Lng' =>0,
+        '1st' =>0,
+        '1st%' =>0,
+        '20+' =>0,
+        '40+' =>0,
+        'FUM' =>0
     ];
 }
